@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import math
 import os
 import random
@@ -13,20 +15,15 @@ import sys
 
 def timeConversion(s):
     # Write your code here
-    time=re.search(r"(?P<hh>..):(?P<mm>..):(?P<ss>..)(?P<ampm>..)",s)
-    hour=time.group('hh')
-    if time.group('ampm')=='PM':
-        if hour == '12':
-            hr=12
-        else:
-            hr=str(int(hour)+12)
+    time = s.split(":")
+    if s[-2:] == "PM":
+        if time[0] != "12":
+            time[0] = str(int(time[0])+12)
     else:
-        if hour=='12':
-            hr='00'
-        else:
-            hr=hour
-    
-    return(hr+":"+time.group('mm')+":"+time.group('ss'))
+        if time[0] == "12":
+            time[0] = "00"
+    ntime = ':'.join(time)
+    return str(ntime[:-2])
              
 
 if __name__ == '__main__':
@@ -39,3 +36,4 @@ if __name__ == '__main__':
     fptr.write(result + '\n')
 
     fptr.close()
+
